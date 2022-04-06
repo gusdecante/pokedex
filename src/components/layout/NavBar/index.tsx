@@ -14,7 +14,7 @@ const NavBar: React.FC<NavBar> = ({ ...props }) => {
       <Toolbar>
         <Link href="/">
           <a className={classes.link}>
-            <Typography>Pokedex</Typography>
+            <Typography className={classes.title}>Pokedex</Typography>
           </a>
         </Link>
       </Toolbar>

@@ -3,12 +3,17 @@ import { Theme } from "@mui/material";
 
 export default makeStyles((theme: Theme) => ({
   AppBar: {
-    backgroundColor: "black",
-    "&.MuiPaper-root.MuiAppBar-root": {},
-    // "&.MuiBox-root": {
-    // },
+    "&.MuiPaper-root.MuiAppBar-root": {
+      backgroundColor: "black",
+    },
   },
   link: {
     textDecoration: "none",
+  },
+  title: {
+    "&.MuiTypography-root": {
+      cursor: "pointer",
+      color: "white",
+    },
   },
 }));

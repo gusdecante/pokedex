@@ -1,12 +1,22 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from "react";
-import Document, { Html, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@mui/styles";
+import { theme } from "../../styles/theme";
 
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
+        <Head>
+          <meta name="theme-color" content={theme.palette.primary.main} />
+          <link rel="shortcut icon" href="favicon.png" type="image/png" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
@@ -16,10 +26,7 @@ export default class MyDocument extends Document {
   }
 }
 
-// `getInitialProps` belongs to `_document` (instead of `_app`),
-// it's compatible with server-side generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
-  // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
@@ -32,7 +39,6 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),
       sheets.getStyleElement(),

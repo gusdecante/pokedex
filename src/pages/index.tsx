@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
 
-import { NavBar } from "../components";
+import { NavBar, Pokedex } from "../components";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar />
+      <Pokedex />
     </div>
   );
 };
