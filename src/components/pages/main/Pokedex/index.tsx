@@ -8,6 +8,8 @@ import { PokemonCard } from "../PokemonCard";
 
 import axios from "axios";
 
+import useStyles from "./styles";
+
 type PokemonDataProps = {
   id: number;
   url: string;
@@ -15,6 +17,7 @@ type PokemonDataProps = {
 };
 
 const Pokedex: React.FC<BoxProps> = ({ ...props }) => {
+  const classes = useStyles();
   const [pokemonList, setPokemonList] = useState<any>();
   useEffect(() => {
     axios.get(`${POKEMON_API_URL}?limit=800`).then((response) => {
@@ -37,10 +40,10 @@ const Pokedex: React.FC<BoxProps> = ({ ...props }) => {
   return (
     <Box {...props}>
       {pokemonList ? (
-        <Grid container spacing={2}>
+        <Grid className={classes.pokedexContainer} container spacing={2}>
           {pokemonList.map((pokemon: any) => (
             <PokemonCard
-              key={pokemon.name}
+              key={pokemon.id}
               id={pokemon.id}
               name={pokemon.name}
               image={pokemon.url}
