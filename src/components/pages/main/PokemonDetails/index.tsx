@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { Box, Typography, Grid, Button } from "@mui/material";
+import { Favorite as FavoriteIcon } from "@mui/icons-material";
+
+import axios from "axios";
 
 import { POKEMON_API_URL } from "../../../../core/config";
 import { CustomCircularProgress } from "../../../";
+import { PokemonShape } from "../../interface/PokemonShape";
 
-import axios from "axios";
+import { useStyles } from "./styles";
 
 type PokemonDetailsProps = {
   pokemonId?: string;
@@ -12,15 +17,75 @@ type PokemonDetailsProps = {
 export const PokemonDetails: React.FC<PokemonDetailsProps> = ({
   pokemonId,
 }) => {
-  const [pokemon, setPokemon] = useState<any>();
-  useEffect(() => {
-    axios.get(`${POKEMON_API_URL}/${pokemonId}`).then((response) => {
-      console.log(response);
-      if (response.status >= 200 && response.status < 300) {
-        setPokemon(response.data);
-      }
-    });
-  }, []);
+  const { classes } = useStyles();
+  const [pokemon, setPokemon] = useState<PokemonShape>();
 
-  return pokemon ? <CustomCircularProgress /> : <CustomCircularProgress />;
+  useEffect(() => {
+    axios
+      .get(`${POKEMON_API_URL}/${Number(pokemonId) + 1}`)
+      .then(({ data, status }) => {
+        console.log(data);
+        if (status >= 200 && status < 300) {
+          setPokemon(data);
+        }
+      });
+  }, [pokemonId]);
+
+  useEffect(() => {
+    console.log(pokemon);
+  }, [pokemon]);
+
+  return pokemon ? (
+    <Box>
+      <Box className={classes.pokedexDetailsRoot}>
+        <Typography variant="h1">{pokemon.name}</Typography>
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <Box className={classes.pokemonInfoContainer}>
+          <hr />
+          <Grid container>
+            <Grid item md={1}>
+              <Button className={classes.favouriteButton}>
+                <FavoriteIcon />
+              </Button>
+            </Grid>
+            <Grid item md={2}>
+              <Typography className={classes.text}>
+                Name
+                <br />
+                {pokemon.name}
+              </Typography>
+            </Grid>
+            <Grid item md={2}>
+              <Typography className={classes.text}>
+                Height
+                <br />
+                {pokemon.height}m
+              </Typography>
+            </Grid>
+            <Grid item md={2}>
+              <Typography className={classes.text}>
+                Weight
+                <br />
+                {pokemon.weight}kg
+              </Typography>
+            </Grid>
+            {pokemon.types.map(({ type }, index) => {
+              const { name } = type;
+              return (
+                <Grid key={index} item md={2}>
+                  <Typography className={classes.text}>
+                    Type
+                    <br />
+                    {name}
+                  </Typography>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
+      </Box>
+    </Box>
+  ) : (
+    <CustomCircularProgress />
+  );
 };

@@ -7,6 +7,8 @@ import createCache, { EmotionCache } from "@emotion/cache";
 import { theme } from "../../styles/theme";
 import { NavBar } from "../components";
 
+import "@fontsource/roboto";
+
 let muiCache: EmotionCache | undefined = undefined;
 
 export const createMuiCache = () =>
