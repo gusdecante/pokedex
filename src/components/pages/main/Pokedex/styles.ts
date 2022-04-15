@@ -14,10 +14,4 @@ export const useStyles = makeStyles()((theme: Theme) => ({
     padding: theme.spacing(2),
     backgroundColor: "rgb(68, 68, 68)",
   },
-  circularProgressRoot: {
-    "&.MuiCircularProgress-root": {
-      color: "lightgrey",
-      marginTop: "160px",
-    },
-  },
 }));

@@ -6,6 +6,8 @@ import { POKEMON_API_URL, IMAGE_API_URL } from "../../../../core/config";
 
 import { PokemonCard } from "../PokemonCard";
 
+import { CustomCircularProgress } from "../../../";
+
 import axios from "axios";
 
 import { useStyles } from "./styles";
@@ -16,7 +18,7 @@ type PokemonDataProps = {
   name: string;
 };
 
-const Pokedex: React.FC<BoxProps> = ({ ...props }) => {
+export const Pokedex: React.FC<BoxProps> = ({ ...props }) => {
   const { classes } = useStyles();
   const [pokemonList, setPokemonList] = useState<any>();
   useEffect(() => {
@@ -51,10 +53,8 @@ const Pokedex: React.FC<BoxProps> = ({ ...props }) => {
           ))}
         </Grid>
       ) : (
-        <CircularProgress className={classes.circularProgressRoot} />
+        <CustomCircularProgress />
       )}
     </Box>
   );
 };
-
-export default Pokedex;
