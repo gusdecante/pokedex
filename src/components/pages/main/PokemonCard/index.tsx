@@ -4,7 +4,7 @@ import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
 
 import Link from "next/link";
 
-import useStyles from "./styles";
+import { useStyles } from "./styles";
 
 interface IPokeomnCard {
   id: number;
@@ -13,11 +13,11 @@ interface IPokeomnCard {
 }
 
 export const PokemonCard: React.FC<IPokeomnCard> = ({ id, name, image }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <Grid item xs={12} sm={2}>
       <Link href={`pokemon/${id}`}>
-        <a>
+        <a className={classes.linkRoot}>
           <Card className={classes.cardRoot}>
             <CardMedia className={classes.cardMedia} image={image} />
             <CardContent>

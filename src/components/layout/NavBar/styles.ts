@@ -1,15 +1,26 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "tss-react/mui";
 import { Theme } from "@mui/material";
 
-export default makeStyles((theme: Theme) => ({
-  AppBar: {
-    backgroundColor: "black",
+export const useStyles = makeStyles()((theme: Theme) => ({
+  appBarRoot: {
+    "&.MuiPaper-root.MuiAppBar-root": {
+      backgroundColor: "black",
+    },
   },
   link: {
     textDecoration: "none",
   },
   title: {
-    cursor: "pointer",
-    color: "white",
+    "&.MuiTypography-root": {
+      cursor: "pointer",
+      color: "white",
+      fontHeight: "2rem",
+      "& span": {
+        color: "lightgray",
+      },
+    },
+    "&.MuiTypography-root:first-letter": {
+      color: "red",
+    },
   },
 }));

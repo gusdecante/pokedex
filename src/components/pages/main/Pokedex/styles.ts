@@ -1,10 +1,23 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "tss-react/mui";
 import { Theme } from "@mui/material";
 
-export default makeStyles((theme: Theme) => ({
-  pokedexContainer: {
-    textAlign: "center",
-    padding: "80px 10px 0px 10px",
+export const useStyles = makeStyles()((theme: Theme) => ({
+  pokedexRoot: {
+    "&.MuiBox-root": {
+      marginTop: theme.spacing(7),
+      display: "flex",
+      justifyContent: "center",
+    },
+  },
+  pokedexGridContainer: {
+    textAlign: "left",
+    padding: theme.spacing(2),
     backgroundColor: "rgb(68, 68, 68)",
+  },
+  circularProgressRoot: {
+    "&.MuiCircularProgress-root": {
+      color: "lightgrey",
+      marginTop: "160px",
+    },
   },
 }));

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import { NavBar, Pokedex } from "../components";
+import { Pokedex } from "../components";
 
 const Home: NextPage = () => {
   return (

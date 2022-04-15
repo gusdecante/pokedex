@@ -1,7 +1,7 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "tss-react/mui";
 import { Theme } from "@mui/material";
 
-export default makeStyles((theme: Theme) => ({
+export const useStyles = makeStyles()((theme: Theme) => ({
   cardRoot: {
     cursor: "pointer",
     backgroundColor: "black",
@@ -16,6 +16,14 @@ export default makeStyles((theme: Theme) => ({
     height: "130px",
   },
   cardContent: {
-    textAlign: "center",
+    "&.MuiTypography-root": {
+      textAlign: "center",
+      "&:first-letter": {
+        textTransform: "uppercase",
+      },
+    },
+  },
+  linkRoot: {
+    textDecoration: "none",
   },
 }));
