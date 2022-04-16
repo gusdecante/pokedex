@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import { Favorite as FavoriteIcon } from "@mui/icons-material";
 
@@ -9,14 +10,13 @@ import { CustomCircularProgress } from "../../../";
 import { PokemonShape } from "../../interface/PokemonShape";
 
 import { useStyles } from "./styles";
+import { toggleFavourite } from "../../../redux/action";
 
 type PokemonDetailsProps = {
   pokemonId?: string;
 };
 
-export const PokemonDetails: React.FC<PokemonDetailsProps> = ({
-  pokemonId,
-}) => {
+const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
   const { classes } = useStyles();
   const [pokemon, setPokemon] = useState<PokemonShape>();
 
@@ -31,9 +31,11 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = ({
       });
   }, [pokemonId]);
 
-  useEffect(() => {
-    console.log(pokemon);
-  }, [pokemon]);
+  const favouriteChecker = (pokemon: any) => {
+    let found = true;
+
+    return found;
+  };
 
   return pokemon ? (
     <Box>
@@ -44,8 +46,15 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = ({
           <hr />
           <Grid container>
             <Grid item md={1}>
-              <Button className={classes.favouriteButton}>
-                <FavoriteIcon />
+              <Button
+                className={classes.favouriteButton}
+                onClick={() => toggleFavourite(pokemon)}
+              >
+                <FavoriteIcon
+                  className={
+                    favouriteChecker(pokemon) ? classes.isFavouriteIcon : ""
+                  }
+                />
               </Button>
             </Grid>
             <Grid item md={2}>
@@ -89,3 +98,13 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = ({
     <CustomCircularProgress />
   );
 };
+
+const mapStateToProps = (state: any) => ({
+  favourite: state.favourite,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  tooggleFavourite: (pokemon: any) => dispatch(toggleFavourite(pokemon)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PokemonDetails);

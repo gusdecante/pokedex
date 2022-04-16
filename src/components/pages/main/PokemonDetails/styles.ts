@@ -43,6 +43,12 @@ export const useStyles = makeStyles()((theme: Theme) => ({
       },
     },
   },
+  isFavouriteIcon: {
+    "&.MuiSvgIcon-root": {
+      fontSize: "2.25rem",
+      color: "red",
+    },
+  },
   text: {
     "&.MuiTypography-root": {
       fontSize: "30px",
