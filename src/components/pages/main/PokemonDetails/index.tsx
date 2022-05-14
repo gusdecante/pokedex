@@ -10,7 +10,6 @@ import { CustomCircularProgress } from "../../../";
 import { PokemonShape } from "../../interface/PokemonShape";
 
 import { useStyles } from "./styles";
-import { toggleFavourite } from "../../../redux/action";
 
 type PokemonDetailsProps = {
   pokemonId?: string;
@@ -48,7 +47,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
             <Grid item md={1}>
               <Button
                 className={classes.favouriteButton}
-                onClick={() => toggleFavourite(pokemon)}
+                onClick={() => {}}
               >
                 <FavoriteIcon
                   className={
@@ -99,12 +98,4 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  favourite: state.favourite,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  tooggleFavourite: (pokemon: any) => dispatch(toggleFavourite(pokemon)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PokemonDetails);
+export default PokemonDetails;

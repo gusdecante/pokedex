@@ -1,8 +1,8 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
+import Router from "next/router";
 
-import Link from "next/link";
+import { CustomCardFlip } from "../../../";
 
 import { useStyles } from "./styles";
 
@@ -14,18 +14,29 @@ interface IPokeomnCard {
 
 export const PokemonCard: React.FC<IPokeomnCard> = ({ id, name, image }) => {
   const { classes } = useStyles();
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+
   return (
     <Grid item xs={12} sm={2}>
-      <Link href={`pokemon/${id}`}>
-        <a className={classes.linkRoot}>
-          <Card className={classes.cardRoot}>
-            <CardMedia className={classes.cardMedia} image={image} />
-            <CardContent>
-              <Typography className={classes.cardContent}>{name}</Typography>
-            </CardContent>
-          </Card>
-        </a>
-      </Link>
+      <CustomCardFlip isFlipped={isFlipped}>
+        <Card className={classes.cardRoot} onClick={() => setIsFlipped(true)}>
+          <CardMedia className={classes.cardMedia} image={image} />
+          <CardContent>
+            <Typography className={classes.cardContent}>{name}</Typography>
+          </CardContent>
+        </Card>
+        <Card
+          className={classes.cardRoot}
+          onClick={() => Router.push(`pokemon/${id}`)}
+        >
+          <CardMedia className={classes.cardMedia} image={image} />
+          <CardContent>
+            <Typography className={classes.cardContent}>
+              Verso do Card
+            </Typography>
+          </CardContent>
+        </Card>
+      </CustomCardFlip>
     </Grid>
   );
 };
