@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
 import Router from "next/router";
 
-import { CustomCardFlip } from "../../../";
-
 import { useStyles } from "./styles";
 
 interface IPokeomnCard {
@@ -18,25 +16,15 @@ export const PokemonCard: React.FC<IPokeomnCard> = ({ id, name, image }) => {
 
   return (
     <Grid item xs={12} sm={2}>
-      <CustomCardFlip isFlipped={isFlipped}>
-        <Card className={classes.cardRoot} onClick={() => setIsFlipped(true)}>
-          <CardMedia className={classes.cardMedia} image={image} />
-          <CardContent>
-            <Typography className={classes.cardContent}>{name}</Typography>
-          </CardContent>
-        </Card>
-        <Card
-          className={classes.cardRoot}
-          onClick={() => Router.push(`pokemon/${id}`)}
-        >
-          <CardMedia className={classes.cardMedia} image={image} />
-          <CardContent>
-            <Typography className={classes.cardContent}>
-              Verso do Card
-            </Typography>
-          </CardContent>
-        </Card>
-      </CustomCardFlip>
+      <Card
+        className={classes.cardRoot}
+        onClick={() => Router.push(`pokemon/${id}`)}
+      >
+        <CardMedia className={classes.cardMedia} image={image} />
+        <CardContent>
+          <Typography className={classes.cardContent}>{name}</Typography>
+        </CardContent>
+      </Card>
     </Grid>
   );
 };
