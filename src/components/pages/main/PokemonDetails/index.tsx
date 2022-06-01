@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import { Favorite as FavoriteIcon } from "@mui/icons-material";
 
@@ -8,6 +7,8 @@ import axios from "axios";
 import { POKEMON_API_URL } from "../../../../core/config";
 import { CustomCircularProgress } from "../../../";
 import { PokemonShape } from "../../interface/PokemonShape";
+
+import { CustomCardFlip, CustomGridItem } from "../../../";
 
 import { useStyles } from "./styles";
 
@@ -36,61 +37,55 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
     return found;
   };
 
+  useEffect(() => {
+    console.log(pokemon);
+  }, [pokemon]);
+
   return pokemon ? (
-    <Box>
-      <Box className={classes.pokedexDetailsRoot}>
-        <Typography variant="h1">{pokemon.name}</Typography>
-        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-        <Box className={classes.pokemonInfoContainer}>
-          <hr />
-          <Grid container>
-            <Grid item md={1}>
-              <Button
-                className={classes.favouriteButton}
-                onClick={() => {}}
-              >
+    <Box className={classes.pokedexDetailsRoot}>
+      <Typography variant="h1">{pokemon.name}</Typography>
+      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+      <Box className={classes.pokemonInfoContainer}>
+        <hr />
+        <Grid container>
+          <CustomGridItem
+            md={2}
+            button={
+              <Button className={classes.favouriteButton} onClick={() => {}}>
                 <FavoriteIcon
                   className={
                     favouriteChecker(pokemon) ? classes.isFavouriteIcon : ""
                   }
                 />
               </Button>
-            </Grid>
-            <Grid item md={2}>
-              <Typography className={classes.text}>
-                Name
+            }
+          />
+          <CustomGridItem md={2}>
+            Name
+            <br />
+            {pokemon.name}
+          </CustomGridItem>
+          <CustomGridItem md={2}>
+            Height
+            <br />
+            {pokemon.height}m
+          </CustomGridItem>
+          <CustomGridItem md={2}>
+            Weight
+            <br />
+            {pokemon.weight}kg
+          </CustomGridItem>
+          {pokemon.types.map(({ type }, index) => {
+            const { name } = type;
+            return (
+              <CustomGridItem key={index} md={2}>
+                Type
                 <br />
-                {pokemon.name}
-              </Typography>
-            </Grid>
-            <Grid item md={2}>
-              <Typography className={classes.text}>
-                Height
-                <br />
-                {pokemon.height}m
-              </Typography>
-            </Grid>
-            <Grid item md={2}>
-              <Typography className={classes.text}>
-                Weight
-                <br />
-                {pokemon.weight}kg
-              </Typography>
-            </Grid>
-            {pokemon.types.map(({ type }, index) => {
-              const { name } = type;
-              return (
-                <Grid key={index} item md={2}>
-                  <Typography className={classes.text}>
-                    Type
-                    <br />
-                    {name}
-                  </Typography>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
+                {name}
+              </CustomGridItem>
+            );
+          })}
+        </Grid>
       </Box>
     </Box>
   ) : (

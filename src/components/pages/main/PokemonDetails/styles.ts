@@ -49,9 +49,4 @@ export const useStyles = makeStyles()((theme: Theme) => ({
       color: "red",
     },
   },
-  text: {
-    "&.MuiTypography-root": {
-      fontSize: "30px",
-    },
-  },
 }));
