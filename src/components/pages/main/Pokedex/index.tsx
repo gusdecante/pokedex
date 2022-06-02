@@ -22,7 +22,7 @@ export const Pokedex: React.FC<BoxProps> = ({ ...props }) => {
   const { classes } = useStyles();
   const [pokemonList, setPokemonList] = useState<any>();
   useEffect(() => {
-    axios.get(`${POKEMON_API_URL}?limit=800`).then((response) => {
+    axios.get(`${POKEMON_API_URL}?limit=100`).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         const { results } = response.data;
         let newPokemonData: PokemonDataProps[] = [];

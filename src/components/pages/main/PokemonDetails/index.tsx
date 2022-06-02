@@ -19,6 +19,7 @@ type PokemonDetailsProps = {
 const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
   const { classes } = useStyles();
   const [pokemon, setPokemon] = useState<PokemonShape>();
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
   useEffect(() => {
     axios
@@ -42,52 +43,86 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
   }, [pokemon]);
 
   return pokemon ? (
-    <Box className={classes.pokedexDetailsRoot}>
-      <Typography variant="h1">{pokemon.name}</Typography>
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-      <Box className={classes.pokemonInfoContainer}>
-        <hr />
-        <Grid container>
-          <CustomGridItem
-            md={2}
-            button={
-              <Button className={classes.favouriteButton} onClick={() => {}}>
-                <FavoriteIcon
-                  className={
-                    favouriteChecker(pokemon) ? classes.isFavouriteIcon : ""
-                  }
-                />
-              </Button>
-            }
-          />
-          <CustomGridItem md={2}>
-            Name
-            <br />
-            {pokemon.name}
-          </CustomGridItem>
-          <CustomGridItem md={2}>
-            Height
-            <br />
-            {pokemon.height}m
-          </CustomGridItem>
-          <CustomGridItem md={2}>
-            Weight
-            <br />
-            {pokemon.weight}kg
-          </CustomGridItem>
-          {pokemon.types.map(({ type }, index) => {
-            const { name } = type;
-            return (
-              <CustomGridItem key={index} md={2}>
-                Type
-                <br />
-                {name}
-              </CustomGridItem>
-            );
-          })}
-        </Grid>
+    <CustomCardFlip isFlipped={isFlipped}>
+      <Box
+        className={classes.pokedexDetailsRoot}
+        onClick={() => setIsFlipped(true)}
+      >
+        <Typography variant="h1">{pokemon.name}</Typography>
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <Box className={classes.pokemonInfoContainer}>
+          <hr />
+          <Grid container>
+            <CustomGridItem
+              md={2}
+              button={
+                <Button className={classes.favouriteButton} onClick={() => {}}>
+                  <FavoriteIcon
+                    className={
+                      favouriteChecker(pokemon) ? classes.isFavouriteIcon : ""
+                    }
+                  />
+                </Button>
+              }
+            />
+            <CustomGridItem md={2}>
+              Name
+              <br />
+              {pokemon.name}
+            </CustomGridItem>
+            <CustomGridItem md={2}>
+              Height
+              <br />
+              {pokemon.height}m
+            </CustomGridItem>
+            <CustomGridItem md={2}>
+              Weight
+              <br />
+              {pokemon.weight}kg
+            </CustomGridItem>
+            {pokemon.types.map(({ type }, index) => {
+              const { name } = type;
+              return (
+                <CustomGridItem key={index} md={2}>
+                  Type
+                  <br />
+                  {name}
+                </CustomGridItem>
+              );
+            })}
+          </Grid>
+        </Box>
       </Box>
-    </Box>
+      <Box
+        className={classes.pokedexDetailsRoot}
+        onClick={() => setIsFlipped(false)}
+      >
+        <Typography variant="h1">{pokemon.name}</Typography>
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <Box className={classes.pokemonInfoContainer}>
+          <hr />
+          <Grid container>
+            <CustomGridItem
+              md={2}
+              button={
+                <Button className={classes.favouriteButton} onClick={() => {}}>
+                  <FavoriteIcon
+                    className={
+                      favouriteChecker(pokemon) ? classes.isFavouriteIcon : ""
+                    }
+                  />
+                </Button>
+              }
+            />
+            <CustomGridItem md={2}>
+              Name
+              <br />
+              {pokemon.name}
+            </CustomGridItem>
+          </Grid>
+        </Box>
+      </Box>
+    </CustomCardFlip>
   ) : (
     <CustomCircularProgress />
   );

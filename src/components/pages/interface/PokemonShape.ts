@@ -10,11 +10,17 @@ export type PokemonTypeProps = {
   };
 };
 
+export type FrontDefaultImagesProps = {
+  front_default: string;
+};
+
 export interface PokemonShape {
   name: string;
   height: number;
   weight: number;
   abilities: PokemonAbilityProps[];
-  sprites: { front_default: string };
+  sprites: FrontDefaultImagesProps;
   types: PokemonTypeProps[];
+  base_experience: number;
+  category: string;
 }
