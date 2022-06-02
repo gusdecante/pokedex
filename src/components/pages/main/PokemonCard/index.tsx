@@ -12,7 +12,6 @@ interface IPokeomnCard {
 
 export const PokemonCard: React.FC<IPokeomnCard> = ({ id, name, image }) => {
   const { classes } = useStyles();
-  const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
   return (
     <Grid item xs={12} sm={2}>
