@@ -2,7 +2,7 @@
 export { NavBar } from "./layout";
 
 // pages
-export { Pokedex } from "./pages/main/Pokedex";
+export { Pokedex } from "./pages/main/Pokedex/Pokedex";
 export { default as PokemonDetails } from "./pages/main/PokemonDetails";
 
 // widgets
