@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import { GetStaticProps } from "next";
 import type { NextPage } from "next";
 
