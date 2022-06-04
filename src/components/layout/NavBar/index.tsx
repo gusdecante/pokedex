@@ -8,7 +8,12 @@ import {
   FormGroup,
   FormControlLabel,
   Switch,
+  Container,
 } from "@mui/material";
+import {
+  LightMode as LightModeIcon,
+  Nightlight as NightlightIcon,
+} from "@mui/icons-material";
 
 import { useStyles } from "./styles";
 
@@ -19,7 +24,7 @@ const NavBar: React.FC<NavBar> = ({ ...props }) => {
   const { classes } = useStyles({ color: isDarkMode ? "dark" : "light" });
   const labelMode = isDarkMode ? "Dark" : "Light";
   return (
-    <AppBar {...props} position="fixed" className={classes.appBarRoot}>
+    <AppBar {...props} className={classes.appBarRoot}>
       <Toolbar className={classes.toobarRoot}>
         <Link href="/">
           <a className={classes.link}>
@@ -28,17 +33,27 @@ const NavBar: React.FC<NavBar> = ({ ...props }) => {
             </Typography>
           </a>
         </Link>
-        <FormGroup>
-          <FormControlLabel
-            label={`${labelMode} Mode`}
-            control={
-              <Switch
-                defaultChecked={isDarkMode}
-                onClick={() => setIsDarkMode(!isDarkMode)}
-              />
-            }
-          />
-        </FormGroup>
+        <Container
+          disableGutters
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
+          <FormGroup>
+            <FormControlLabel
+              label={`${labelMode} Mode`}
+              control={
+                <Switch
+                  defaultChecked={isDarkMode}
+                  onClick={() => setIsDarkMode(!isDarkMode)}
+                />
+              }
+            />
+          </FormGroup>
+          {isDarkMode ? <NightlightIcon /> : <LightModeIcon />}
+        </Container>
       </Toolbar>
     </AppBar>
   );
