@@ -4,7 +4,7 @@ import { PokemonCard } from "../PokemonCard/PokemonCard";
 
 import { CustomCircularProgress } from "../../..";
 
-import { Box, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 
 import { useStyles } from "./styles";
 
@@ -22,16 +22,27 @@ export const Pokedex: React.FC<PokedexShape> = ({ pokemons }) => {
   const { classes } = useStyles();
 
   return (
-    <Box className={classes.pokedexRoot}>
+    <Container className={classes.pokedexContainer}>
       {pokemons ? (
-        <Grid className={classes.pokedexGridContainer} container spacing={2}>
+        <Grid
+          container
+          spacing={{ xs: 1, sm: 1, md: 2, lg: 2, xl: 1 }}
+          xs={16}
+          sm={16}
+          md={16}
+          lg={16}
+          xl={16}
+          justifyContent="center"
+        >
           {pokemons.map(({ id, name, url }) => (
-            <PokemonCard key={id} id={id} name={name} image={url} />
+            <Grid key={id} item xs={16} sm={16} md={3} lg={4} xl={16}>
+              <PokemonCard id={id} name={name} image={url} />
+            </Grid>
           ))}
         </Grid>
       ) : (
         <CustomCircularProgress />
       )}
-    </Box>
+    </Container>
   );
 };
