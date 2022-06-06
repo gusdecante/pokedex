@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
+
+import { POKEMON_API_URL } from "../../../../core/config";
+import { CustomCircularProgress } from "../../../";
+import { PokemonShape } from "../interface/PokemonShape";
+import { CustomCardFlip, CustomGridItem } from "../../../";
+
 import { Box, Typography, Grid, Button } from "@mui/material";
 import { Favorite as FavoriteIcon } from "@mui/icons-material";
 
 import axios from "axios";
-
-import { POKEMON_API_URL } from "../../../../core/config";
-import { CustomCircularProgress } from "../../../";
-import { PokemonShape } from "../../interface/PokemonShape";
-
-import { CustomCardFlip, CustomGridItem } from "../../../";
 
 import { useStyles } from "./styles";
 
@@ -49,7 +50,12 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
         onClick={() => setIsFlipped(true)}
       >
         <Typography variant="h1">{pokemon.name}</Typography>
-        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <Image
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
+          width="250"
+          height="250"
+        />
         <Box className={classes.pokemonInfoContainer}>
           <hr />
           <Grid container>
@@ -98,7 +104,12 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ pokemonId }) => {
         onClick={() => setIsFlipped(false)}
       >
         <Typography variant="h1">{pokemon.name}</Typography>
-        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <Image
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
+          width="250"
+          height="250"
+        />
         <Box className={classes.pokemonInfoContainer}>
           <hr />
           <Grid container>
