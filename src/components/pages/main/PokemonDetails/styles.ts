@@ -1,11 +1,12 @@
 import { makeStyles } from "tss-react/mui";
 import { Theme } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 export const useStyles = makeStyles()((theme: Theme) => ({
   pokedexDetailsRoot: {
     "&.MuiBox-root": {
       height: "80vh",
-      backgroundColor: "black",
+      backgroundColor: theme.palette.grey[900],
       color: "white",
       marginTop: "75px",
       textAlign: "center",

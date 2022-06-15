@@ -24,7 +24,7 @@ const NavBar: React.FC<NavBar> = ({ ...props }) => {
   const { classes } = useStyles({ color: isDarkMode ? "dark" : "light" });
   const labelMode = isDarkMode ? "Dark" : "Light";
   return (
-    <AppBar {...props} className={classes.appBarRoot}>
+    <AppBar className={classes.appBarRoot}>
       <Toolbar className={classes.toobarRoot}>
         <Link href="/">
           <a className={classes.link}>
